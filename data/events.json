@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Conférence Cloud Computing",
+      "date": "2026-03-15",
+      "location": "Paris - La Défense",
+      "description": "Introduction aux services Azure et bonnes pratiques cloud-native"
+    },
+    {
+      "id": 2,
+      "title": "Workshop Kubernetes",
+      "date": "2026-04-10",
+      "location": "Lyon - Campus Digital",
+      "description": "Déploiement d'applications conteneurisées sur AKS"
+    },
+    {
+      "id": 3,
+      "title": "Hackathon DevOps",
+      "date": "2026-05-20",
+      "location": "Marseille - Tech Hub",
+      "description": "48h pour créer une pipeline CI/CD complète"
+    }
+  ]
+}

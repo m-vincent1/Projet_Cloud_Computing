@@ -36,3 +36,16 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Secrets - NEVER commit these!
+*.pem
+*.key
+secrets.yaml
+secrets.json

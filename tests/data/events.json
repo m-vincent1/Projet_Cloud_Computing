@@ -1,0 +1,11 @@
+{
+    "items": [
+        {
+            "id": 1,
+            "title": "Test Event",
+            "date": "2026-01-01",
+            "location": "Test Location",
+            "description": "Test description"
+        }
+    ]
+}
