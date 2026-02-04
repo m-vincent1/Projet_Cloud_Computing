@@ -8,7 +8,7 @@
 | **Sprint** | Sprint 1 |
 | **Responsable** | Partenaire B (Ingénieur Docker) |
 | **Priorité** | Haute |
-| **Statut** | 🔴 À faire |
+| **Statut** | 🟡 En cours |
 
 ---
 
@@ -30,10 +30,10 @@ Configurer le compte Azure Blob Storage, créer les conteneurs nécessaires, et 
 
 - [ ] Compte Azure Storage créé sur Azure for Students
 - [ ] Conteneur blob créé pour les fichiers de contenu
-- [ ] Fichiers de test uploadés :
-  - [ ] `events.json` ou `events.yaml`
-  - [ ] `news.json` ou `news.yaml`
-  - [ ] `faq.json` ou `faq.yaml`
+- [x] Fichiers de test créés :
+  - [x] `events.json` ou `events.yaml`
+  - [x] `news.json` ou `news.yaml`
+  - [x] `faq.json` ou `faq.yaml`
 - [ ] Chaîne de connexion sécurisée générée
 - [ ] Connexion testée depuis l'application locale
 
@@ -46,14 +46,14 @@ Configurer le compte Azure Blob Storage, créer les conteneurs nécessaires, et 
    - Tier : Standard
    - Redondance : LRS (moins cher)
 2. [ ] Créer un conteneur blob : `content`
-3. [ ] Créer les fichiers de test :
-   - [ ] `events.json`
-   - [ ] `news.json`
-   - [ ] `faq.json`
+3. [x] Créer les fichiers de test :
+   - [x] `events.json`
+   - [x] `news.json`
+   - [x] `faq.json`
 4. [ ] Uploader les fichiers via Azure Portal ou CLI
 5. [ ] Récupérer la chaîne de connexion (Access Keys)
-6. [ ] Stocker la chaîne de connexion de manière sécurisée :
-   - En local : fichier `.env` (non versionné)
+6. [x] Stocker la chaîne de connexion de manière sécurisée :
+   - En local : fichier `.env` (non versionné) - `.env.example` créé
    - En prod : Kubernetes Secret
 7. [ ] Tester la connexion depuis l'application
 

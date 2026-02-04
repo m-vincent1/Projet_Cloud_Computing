@@ -8,7 +8,7 @@
 | **Sprint** | Sprint 1 |
 | **Responsable** | Partenaire B (Ingénieur Docker) |
 | **Priorité** | Haute |
-| **Statut** | 🔴 À faire |
+| **Statut** | 🟢 Terminé |
 
 ---
 
@@ -28,32 +28,32 @@ Créer un Dockerfile optimisé respectant les bonnes pratiques de sécurité et 
 
 ## ✅ Critères d'acceptation
 
-- [ ] Le Dockerfile utilise une image de base slim (ex: `python:3.11-slim`)
-- [ ] L'application s'exécute avec un utilisateur non-root
-- [ ] Aucune dépendance inutile n'est incluse
-- [ ] L'image se build sans erreur
-- [ ] Le conteneur démarre et l'application répond correctement
-- [ ] La taille de l'image est optimisée (< 200 MB idéalement)
+- [x] Le Dockerfile utilise une image de base slim (ex: `python:3.11-slim`)
+- [x] L'application s'exécute avec un utilisateur non-root
+- [x] Aucune dépendance inutile n'est incluse
+- [x] L'image se build sans erreur
+- [x] Le conteneur démarre et l'application répond correctement
+- [x] La taille de l'image est optimisée (< 200 MB idéalement)
 
 ---
 
 ## 🔧 Tâches techniques
 
-1. [ ] Créer le Dockerfile avec multi-stage build (optionnel mais recommandé)
-2. [ ] Utiliser une image de base slim (`python:3.11-slim`)
-3. [ ] Créer un utilisateur non-root :
+1. [x] Créer le Dockerfile avec multi-stage build (optionnel mais recommandé)
+2. [x] Utiliser une image de base slim (`python:3.11-slim`)
+3. [x] Créer un utilisateur non-root :
    ```dockerfile
    RUN useradd --create-home --shell /bin/bash appuser
    USER appuser
    ```
-4. [ ] Optimiser les layers Docker (ordre des COPY)
-5. [ ] Configurer le `.dockerignore`
-6. [ ] Tester le build local :
+4. [x] Optimiser les layers Docker (ordre des COPY)
+5. [x] Configurer le `.dockerignore`
+6. [x] Tester le build local :
    ```bash
    docker build -t content-platform:local .
    docker run -p 5000:5000 content-platform:local
    ```
-7. [ ] Vérifier que l'application répond sur `http://localhost:5000`
+7. [x] Vérifier que l'application répond sur `http://localhost:5000`
 
 ---
 

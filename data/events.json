@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Conférence Cloud Computing",
+      "date": "2026-03-15",
+      "location": "Paris",
+      "description": "Introduction aux services Azure"
+    },
+    {
+      "id": 2,
+      "title": "Workshop Kubernetes",
+      "date": "2026-04-10",
+      "location": "Lyon",
+      "description": "Déploiement d'applications sur AKS"
+    },
+    {
+      "id": 3,
+      "title": "Meetup DevOps",
+      "date": "2026-05-20",
+      "location": "Marseille",
+      "description": "Bonnes pratiques CI/CD et Infrastructure as Code"
+    }
+  ]
+}

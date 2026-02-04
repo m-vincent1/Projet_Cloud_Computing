@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "id": 1,
+            "title": "Nouvelle version de la plateforme",
+            "date": "2026-02-01",
+            "content": "Lancement de la v2.0 avec de nouvelles fonctionnalités"
+        },
+        {
+            "id": 2,
+            "title": "Partenariat stratégique",
+            "date": "2026-02-10",
+            "content": "Annonce d'un nouveau partenariat avec Microsoft"
+        },
+        {
+            "id": 3,
+            "title": "Certification Azure obtenue",
+            "date": "2026-02-15",
+            "content": "Notre équipe a obtenu la certification Azure Solutions Architect"
+        }
+    ]
+}

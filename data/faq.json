@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "id": 1,
+            "question": "Comment accéder à la plateforme ?",
+            "answer": "Rendez-vous sur le portail web ou utilisez l'API REST."
+        },
+        {
+            "id": 2,
+            "question": "Quels formats de données sont supportés ?",
+            "answer": "La plateforme supporte JSON et YAML."
+        },
+        {
+            "id": 3,
+            "question": "Comment contacter le support ?",
+            "answer": "Envoyez un email à support@cloudplatform.com ou utilisez le formulaire de contact."
+        }
+    ]
+}
