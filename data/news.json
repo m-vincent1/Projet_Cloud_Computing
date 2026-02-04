@@ -2,21 +2,21 @@
     "items": [
         {
             "id": 1,
-            "title": "Lancement de la plateforme v2.0",
+            "title": "Nouvelle version de la plateforme",
             "date": "2026-02-01",
-            "content": "Nouvelle version avec cache optimisé et interface modernisée. Performances améliorées de 40%."
+            "content": "Lancement de la v2.0 avec de nouvelles fonctionnalités"
         },
         {
             "id": 2,
-            "title": "Partenariat avec Microsoft Azure",
+            "title": "Partenariat stratégique",
             "date": "2026-02-10",
-            "content": "Annonce officielle de notre partenariat stratégique pour l'hébergement cloud."
+            "content": "Annonce d'un nouveau partenariat avec Microsoft"
         },
         {
             "id": 3,
-            "title": "Certification ISO 27001 obtenue",
+            "title": "Certification Azure obtenue",
             "date": "2026-02-15",
-            "content": "Notre plateforme est désormais certifiée pour la sécurité de l'information."
+            "content": "Notre équipe a obtenu la certification Azure Solutions Architect"
         }
     ]
 }

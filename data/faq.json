@@ -3,22 +3,17 @@
         {
             "id": 1,
             "question": "Comment accéder à la plateforme ?",
-            "answer": "Rendez-vous sur le portail web principal ou utilisez notre API REST documentée."
+            "answer": "Rendez-vous sur le portail web ou utilisez l'API REST."
         },
         {
             "id": 2,
             "question": "Quels formats de données sont supportés ?",
-            "answer": "La plateforme supporte les formats JSON et YAML pour le stockage des contenus."
+            "answer": "La plateforme supporte JSON et YAML."
         },
         {
             "id": 3,
-            "question": "Comment contacter le support technique ?",
-            "answer": "Envoyez un email à support@cloud-platform.com ou utilisez le chat en ligne."
-        },
-        {
-            "id": 4,
-            "question": "Quelle est la fréquence de mise à jour des données ?",
-            "answer": "Les données sont mises en cache pendant 60 secondes puis actualisées automatiquement."
+            "question": "Comment contacter le support ?",
+            "answer": "Envoyez un email à support@cloudplatform.com ou utilisez le formulaire de contact."
         }
     ]
 }
