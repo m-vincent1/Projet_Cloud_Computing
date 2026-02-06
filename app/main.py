@@ -7,11 +7,26 @@ from flask import Flask, jsonify, render_template_string
 from app.config import Config
 from app.services.content_service import ContentService
 
-# Configuration du logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+# Configuration du logging structuré pour Azure Monitor (US-08)
+class JSONFormatter(logging.Formatter):
+    def format(self, record):
+        log_record = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "level": record.levelname,
+            "message": record.getMessage(),
+            "module": record.module,
+            "logger": record.name
+        }
+        if record.exc_info:
+            log_record["exception"] = self.formatException(record.exc_info)
+        return json.dumps(log_record)
+
+handler = logging.StreamHandler()
+handler.setFormatter(JSONFormatter())
+logging.root.addHandler(handler)
+logging.root.setLevel(logging.INFO)
+# Supprimer le handler par défaut s'il existe pour éviter les doublons
+logging.getLogger().handlers = [handler]
 logger = logging.getLogger(__name__)
 
 # Instance Flask

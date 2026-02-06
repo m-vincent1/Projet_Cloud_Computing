@@ -8,7 +8,7 @@
 | **Sprint** | Sprint 2 |
 | **Responsable** | Partenaire B (Architecte Kubernetes) |
 | **Priorité** | Moyenne |
-| **Statut** | 🔴 À faire |
+| **Statut** | 🟢 Livré (En attente déploiement) |
 
 ---
 
@@ -51,9 +51,9 @@ Configurer Azure Monitor pour le monitoring basique (CPU, mémoire, disponibilit
    ```bash
    az aks enable-addons --resource-group myRG --name myAKS --addons monitoring
    ```
-2. [ ] Configurer les logs applicatifs :
-   - [ ] Niveau INFO dans l'app Flask
-   - [ ] Format JSON pour parsing facile
+2. [x] Configurer les logs applicatifs :
+   - [x] Niveau INFO dans l'app Flask
+   - [x] Format JSON pour parsing facile
 3. [ ] Créer une alerte pour les erreurs 5xx :
    - Azure Portal > Alerts > New alert rule
    - Condition : HTTP 5xx count > 10 sur 5 min

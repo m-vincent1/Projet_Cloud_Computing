@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: content-platform
+data:
+  FLASK_ENV: "production"
+  CACHE_TTL: "60"
+  BLOB_CONTAINER: "content"
+  USE_LOCAL_FILES: "false"

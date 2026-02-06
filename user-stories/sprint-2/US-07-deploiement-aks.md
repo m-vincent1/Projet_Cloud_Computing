@@ -8,7 +8,7 @@
 | **Sprint** | Sprint 2 |
 | **Responsable** | Partenaire B (Architecte Kubernetes) |
 | **Priorité** | Haute |
-| **Statut** | 🔴 À faire |
+| **Statut** | 🟢 Livré (En attente déploiement) |
 
 ---
 
@@ -48,13 +48,13 @@
    ```bash
    az aks create --resource-group myRG --name myAKS --node-count 2 --enable-managed-identity
    ```
-2. [ ] Créer les manifests Kubernetes :
-   - [ ] `k8s/namespace.yaml`
-   - [ ] `k8s/configmap.yaml`
-   - [ ] `k8s/secret.yaml`
-   - [ ] `k8s/deployment.yaml`
-   - [ ] `k8s/service.yaml`
-   - [ ] `k8s/ingress.yaml`
+2. [x] Créer les manifests Kubernetes :
+   - [x] `k8s/namespace.yaml`
+   - [x] `k8s/configmap.yaml`
+   - [x] `k8s/secret.yaml`
+   - [x] `k8s/deployment.yaml`
+   - [x] `k8s/service.yaml`
+   - [x] `k8s/ingress.yaml`
 3. [ ] Installer NGINX Ingress Controller
 4. [ ] Appliquer les manifests :
    ```bash
