@@ -8,7 +8,7 @@
 | **Sprint** | Sprint 2 |
 | **Responsable** | Partenaire A (Spécialiste CI/CD) |
 | **Priorité** | Haute |
-| **Statut** | 🔴 À faire |
+| **Statut** | 🟢 Livré (Intégré) |
 
 ---
 
