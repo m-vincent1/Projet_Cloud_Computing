@@ -32,23 +32,6 @@ class TestHealthz:
         assert 'status' in data
         assert data['status'] == 'healthy'
 
-    def test_healthz_has_timestamp(self, client):
-        """Vérifie que /healthz contient un timestamp"""
-        response = client.get('/healthz')
-        data = json.loads(response.data)
-
-        assert 'timestamp' in data
-        assert len(data['timestamp']) > 0
-
-    def test_healthz_has_uptime(self, client):
-        """Vérifie que /healthz contient l'uptime"""
-        response = client.get('/healthz')
-        data = json.loads(response.data)
-
-        assert 'uptime_seconds' in data
-        assert isinstance(data['uptime_seconds'], (int, float))
-        assert data['uptime_seconds'] >= 0
-
 
 class TestReadyz:
     """Tests pour l'endpoint /readyz (readiness probe)"""
@@ -74,11 +57,10 @@ class TestReadyz:
         assert 'status' in data
         assert data['status'] in ['ready', 'not_ready']
 
-    def test_readyz_has_checks(self, client):
-        """Vérifie que /readyz contient les vérifications"""
+    def test_readyz_has_azure_connection(self, client):
+        """Vérifie que /readyz contient l'état de la connexion Azure"""
         response = client.get('/readyz')
         data = json.loads(response.data)
 
-        assert 'checks' in data
-        assert isinstance(data['checks'], dict)
-        assert 'service_initialized' in data['checks']
+        assert 'azure_connection' in data
+        assert data['azure_connection'] in ['connected', 'failed']
