@@ -1,0 +1,156 @@
+# =============================================================================
+# Pipeline CI/CD - Plateforme de Contenu Cloud-Native
+# =============================================================================
+# US #5 - Automatisation du build, test et déploiement
+# Déclenché à chaque push sur main ou pull request
+# =============================================================================
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ===========================================================================
+  # JOB 1: Lint et Tests
+  # ===========================================================================
+  test:
+    name: 🧪 Lint & Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'app/requirements.txt'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r app/requirements.txt
+          pip install flake8 pytest pytest-cov
+
+      - name: 🔍 Lint with flake8
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 app/ --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings. Max line length is 120.
+          flake8 app/ --count --exit-zero --max-line-length=120 --statistics
+
+      - name: 🧪 Run tests with pytest
+        env:
+          FLASK_ENV: testing
+          USE_LOCAL_FILES: 'True'
+          LOCAL_DATA_PATH: tests/data
+        run: |
+          pytest tests/ -v --cov=app --cov-report=xml --cov-report=term-missing
+
+      - name: 📊 Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage.xml
+
+  # ===========================================================================
+  # JOB 2: Build et Push de l'image Docker vers GHCR
+  # ===========================================================================
+  build-and-push:
+    name: 🐳 Build & Push Docker
+    needs: test
+    runs-on: ubuntu-latest
+    # Ne s'exécute que sur push vers main (pas sur les PR)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.build.outputs.digest }}
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🏷️ Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest
+            type=ref,event=branch
+
+      - name: 🏗️ Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: 📋 Image summary
+        run: |
+          echo "## 🐳 Docker Image Built" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Registry:** ${{ env.REGISTRY }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** ${{ env.IMAGE_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Tags:** ${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Digest:** ${{ steps.build.outputs.digest }}" >> $GITHUB_STEP_SUMMARY
+
+  # ===========================================================================
+  # JOB 3: Déploiement sur AKS (à activer quand AKS sera configuré)
+  # ===========================================================================
+  # deploy:
+  #   name: 🚀 Deploy to AKS
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #
+  #   steps:
+  #     - name: 📥 Checkout code
+  #       uses: actions/checkout@v4
+  #
+  #     - name: 🔐 Azure Login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #
+  #     - name: 🔧 Set AKS context
+  #       uses: azure/aks-set-context@v3
+  #       with:
+  #         resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
+  #         cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
+  #
+  #     - name: 🚀 Deploy to AKS
+  #       run: |
+  #         kubectl apply -f k8s/
+  #         kubectl rollout status deployment/content-platform -n content-platform
