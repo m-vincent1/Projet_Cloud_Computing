@@ -176,19 +176,26 @@ jobs:
           docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           
           # Démarrer le conteneur en arrière-plan
+          # Note: Les données sont déjà dans /app/data/ dans l'image
           docker run -d --name smoke-test-container \
             -p 5000:5000 \
             -e USE_LOCAL_FILES=True \
-            -e LOCAL_DATA_PATH=data \
+            -e LOCAL_DATA_PATH=/app/data \
+            -e FLASK_ENV=production \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           
           # Attendre que le conteneur démarre
-          sleep 10
+          sleep 15
+          
+          # Vérifier que le conteneur est en cours d'exécution
+          docker ps
+          docker logs smoke-test-container || true
 
       - name: 🔥 Run smoke tests
         run: |
           chmod +x ./scripts/smoke-test.sh
           ./scripts/smoke-test.sh http://localhost:5000
+
 
       - name: 🧹 Cleanup
         if: always()
