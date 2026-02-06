@@ -54,9 +54,9 @@ Configurer Azure Monitor pour le monitoring basique (CPU, mémoire, disponibilit
 2. [x] Configurer les logs applicatifs :
    - [x] Niveau INFO dans l'app Flask
    - [x] Format JSON pour parsing facile
-3. [ ] Créer une alerte pour les erreurs 5xx :
-   - Azure Portal > Alerts > New alert rule
-   - Condition : HTTP 5xx count > 10 sur 5 min
+3. [x] Créer une alerte pour les erreurs 5xx (ou CPU > 80%) :
+   - [x] Azure Portal > Alerts > New alert rule
+   - [x] Condition : HTTP 5xx count > 10 sur 5 min ou CPU > 80%
 4. [ ] Créer un dashboard basique :
    - CPU usage
    - Memory usage
