@@ -70,6 +70,21 @@ test_url() {
     fi
 }
 
+# Test spécial pour /readyz qui peut retourner 503 si Azure n'est pas configuré
+test_readyz() {
+    echo -n "  Testing /readyz... "
+    local http_code
+    http_code=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL/readyz" 2>/dev/null)
+    
+    if [ "$http_code" = "200" ] || [ "$http_code" = "503" ]; then
+        echo "✅ OK (HTTP $http_code)"
+        PASSED=$((PASSED + 1))
+    else
+        echo "❌ FAILED (HTTP $http_code)"
+        FAILED=$((FAILED + 1))
+    fi
+}
+
 # -----------------------------------------------------------------------------
 # Étape 2: Tests des endpoints de santé
 # -----------------------------------------------------------------------------
@@ -77,7 +92,7 @@ echo "❤️  Étape 2: Tests de santé (Health Checks)..."
 echo ""
 
 test_url "/healthz" "/healthz"
-test_url "/readyz" "/readyz"
+test_readyz
 test_url "/health" "/health"
 
 echo ""
