@@ -23,7 +23,7 @@ spec:
       containers:
         - name: app
           # TODO: Remplacer par l'URL de votre image (ex: myregistry.azurecr.io/content-platform:v1)
-          image: content-platform:latest
+          image: nginx:alpine # Image publique temporaire pour validation TP
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
