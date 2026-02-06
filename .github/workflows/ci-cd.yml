@@ -154,3 +154,57 @@ jobs:
   #       run: |
   #         kubectl apply -f k8s/
   #         kubectl rollout status deployment/content-platform -n content-platform
+
+  # ===========================================================================
+  # JOB 4: Smoke Tests - US #6
+  # ===========================================================================
+  # Ce job exécute des tests de fumée pour valider le déploiement
+  # Il peut être utilisé localement ou après déploiement sur AKS
+  smoke-test:
+    name: 🔥 Smoke Tests
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Pull and run Docker image
+        run: |
+          # Pull l'image depuis GHCR
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          
+          # Démarrer le conteneur en arrière-plan
+          docker run -d --name smoke-test-container \
+            -p 5000:5000 \
+            -e USE_LOCAL_FILES=True \
+            -e LOCAL_DATA_PATH=data \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          
+          # Attendre que le conteneur démarre
+          sleep 10
+
+      - name: 🔥 Run smoke tests
+        run: |
+          chmod +x ./scripts/smoke-test.sh
+          ./scripts/smoke-test.sh http://localhost:5000
+
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          docker stop smoke-test-container || true
+          docker rm smoke-test-container || true
+
+      - name: 📋 Smoke test summary
+        if: success()
+        run: |
+          echo "## 🔥 Smoke Tests Passed!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All endpoints responded correctly:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ /healthz - Liveness probe" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ /readyz - Readiness probe" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ /api/events - Events API" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ /api/news - News API" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ /api/faq - FAQ API" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ / - Web interface" >> $GITHUB_STEP_SUMMARY
