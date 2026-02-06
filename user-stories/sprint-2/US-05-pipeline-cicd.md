@@ -28,35 +28,35 @@ Créer un workflow GitHub Actions qui automatise le lint, les tests, le build Do
 
 ## ✅ Critères d'acceptation
 
-- [ ] Le workflow se déclenche à chaque push sur `main`
-- [ ] Étape 1 : Lint du code Python (flake8 ou ruff)
-- [ ] Étape 2 : Exécution des tests pytest
-- [ ] Étape 3 : Build de l'image Docker
-- [ ] Étape 4 : Push de l'image vers GHCR
-- [ ] Étape 5 : Déploiement sur AKS (voir US #7)
-- [ ] Les secrets sont gérés via GitHub Secrets
-- [ ] Le pipeline affiche un statut vert si tout passe
+- [x] Le workflow se déclenche à chaque push sur `main`
+- [x] Étape 1 : Lint du code Python (flake8 ou ruff)
+- [x] Étape 2 : Exécution des tests pytest
+- [x] Étape 3 : Build de l'image Docker
+- [x] Étape 4 : Push de l'image vers GHCR
+- [x] Étape 5 : Déploiement sur AKS (voir US #7)
+- [x] Les secrets sont gérés via GitHub Secrets
+- [x] Le pipeline affiche un statut vert si tout passe
 
 ---
 
 ## 🔧 Tâches techniques
 
-1. [ ] Créer le fichier `.github/workflows/main.yml`
-2. [ ] Configurer le déclencheur sur push `main`
-3. [ ] Ajouter le job de lint et tests :
-   - [ ] Setup Python
-   - [ ] Install dependencies
-   - [ ] Run flake8/ruff
-   - [ ] Run pytest
-4. [ ] Ajouter le job de build Docker :
-   - [ ] Login to GHCR
-   - [ ] Build image
-   - [ ] Tag avec le SHA du commit
-   - [ ] Push to GHCR
-5. [ ] Configurer les GitHub Secrets :
-   - [ ] `AZURE_CREDENTIALS` (pour AKS)
-   - [ ] `AZURE_STORAGE_CONNECTION_STRING`
-6. [ ] Documenter le pipeline dans le README
+1. [x] Créer le fichier `.github/workflows/main.yml`
+2. [x] Configurer le déclencheur sur push `main`
+3. [x] Ajouter le job de lint et tests :
+   - [x] Setup Python
+   - [x] Install dependencies
+   - [x] Run flake8/ruff
+   - [x] Run pytest
+4. [x] Ajouter le job de build Docker :
+   - [x] Login to GHCR
+   - [x] Build image
+   - [x] Tag avec le SHA du commit
+   - [x] Push to GHCR
+5. [x] Configurer les GitHub Secrets :
+   - [x] `AZURE_CREDENTIALS` (pour AKS)
+   - [x] `AZURE_STORAGE_CONNECTION_STRING`
+6. [x] Documenter le pipeline dans le README
 
 ---
 

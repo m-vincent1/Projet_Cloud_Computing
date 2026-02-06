@@ -28,28 +28,28 @@ Ajouter une étape de smoke test dans le pipeline CI/CD qui vérifie que l'API r
 
 ## ✅ Critères d'acceptation
 
-- [ ] Un smoke test s'exécute après le déploiement sur AKS
-- [ ] Le test vérifie que `/healthz` retourne HTTP 200
-- [ ] Le test vérifie que `/readyz` retourne HTTP 200
-- [ ] Le test vérifie qu'au moins un endpoint API répond
-- [ ] Le pipeline passe au "Vert" uniquement si l'app est en ligne
-- [ ] Le pipeline échoue si les tests ne passent pas
+- [x] Un smoke test s'exécute après le déploiement sur AKS
+- [x] Le test vérifie que `/healthz` retourne HTTP 200
+- [x] Le test vérifie que `/readyz` retourne HTTP 200
+- [x] Le test vérifie qu'au moins un endpoint API répond
+- [x] Le pipeline passe au "Vert" uniquement si l'app est en ligne
+- [x] Le pipeline échoue si les tests ne passent pas
 
 ---
 
 ## 🔧 Tâches techniques
 
-1. [ ] Créer un script de smoke test :
-   - [ ] `scripts/smoke-test.sh` (bash)
-   - [ ] ou `tests/smoke_test.py` (Python)
-2. [ ] Configurer le test pour utiliser l'URL de prod
-3. [ ] Ajouter l'étape au workflow GitHub Actions :
+1. [x] Créer un script de smoke test :
+   - [x] `scripts/smoke-test.sh` (bash)
+   - [x] ou `tests/smoke_test.py` (Python)
+2. [x] Configurer le test pour utiliser l'URL de prod
+3. [x] Ajouter l'étape au workflow GitHub Actions :
    ```yaml
    - name: Smoke test
      run: ./scripts/smoke-test.sh ${{ env.APP_URL }}
    ```
-4. [ ] Configurer un timeout raisonnable
-5. [ ] Attendre que le déploiement soit prêt avant de tester
+4. [x] Configurer un timeout raisonnable
+5. [x] Attendre que le déploiement soit prêt avant de tester
 
 ---
 
